@@ -8,20 +8,6 @@
 //Establishes the connection
  $conn = sqlsrv_connect($serverName, $connectionOptions);
 
-if (!$conn)
-{
- die("Error connection: ".sqlsrv_errors());
- }
-
- $tsql= "SELECT * FROM [dbo].[restaurant]";
- $getResults= sqlsrv_query($conn, $tsql);
-
- if ($getResults == FALSE)
- {
- die(sqlsrv_errors());
- }
-
-
 ?>
 
 <html>
@@ -40,6 +26,19 @@ if (!$conn)
  <th>Phone</th>
  </tr>
  <?php
+  if (!$conn)
+{
+ die("Error connection: ".sqlsrv_errors());
+ }
+
+ $tsql= "SELECT * FROM [dbo].[restaurant]";
+ $getResults= sqlsrv_query($conn, $tsql);
+
+ if ($getResults == FALSE)
+ {
+ die(sqlsrv_errors());
+ }
+  
  while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
  {
  echo "<tr>";
